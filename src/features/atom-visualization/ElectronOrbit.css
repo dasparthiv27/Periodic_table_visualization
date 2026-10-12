@@ -1,0 +1,26 @@
+.orbit-path {
+  transition: stroke 0.3s ease;
+}
+
+.orbit-shell-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.orbit-rotator--animated {
+  animation-name: orbitRotate;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transform-origin: 0 0;
+}
+
+@keyframes orbitRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

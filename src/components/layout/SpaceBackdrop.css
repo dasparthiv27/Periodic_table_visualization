@@ -1,0 +1,81 @@
+.space-backdrop {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 48% 42%, #101a30 0, var(--bg-app) 68%);
+  contain: strict;
+}
+
+.space-backdrop__video {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .34;
+  pointer-events: none;
+}
+
+.space-backdrop::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(4, 8, 18, .58), rgba(4, 8, 18, .7) 48%, rgba(4, 8, 18, .8));
+}
+
+.space-backdrop__nebula,
+.space-backdrop__stars {
+  position: absolute;
+  z-index: 1;
+  inset: -12%;
+  pointer-events: none;
+}
+
+.space-backdrop__nebula { will-change: transform; }
+.space-backdrop__nebula--blue {
+  background: radial-gradient(ellipse at 17% 27%, rgba(30, 105, 176, .2), transparent 44%), radial-gradient(ellipse at 70% 74%, rgba(13, 105, 148, .12), transparent 42%);
+  animation: space-drift-blue 62s ease-in-out infinite alternate;
+}
+.space-backdrop__nebula--violet {
+  background: radial-gradient(ellipse at 82% 18%, rgba(118, 67, 164, .13), transparent 39%), radial-gradient(ellipse at 42% 84%, rgba(91, 54, 140, .09), transparent 45%);
+  animation: space-drift-violet 78s ease-in-out infinite alternate;
+}
+.space-backdrop__nebula--category {
+  background: radial-gradient(ellipse at 62% 36%, color-mix(in srgb, var(--space-category-accent) 10%, transparent), transparent 42%);
+  opacity: .72;
+  transition: opacity 500ms ease;
+}
+.space-backdrop__stars {
+  inset: 0;
+  opacity: .4;
+  background-image: radial-gradient(1px 1px at 8% 18%, rgba(216,238,255,.8) 50%, transparent 100%), radial-gradient(1px 1px at 19% 74%, rgba(132,202,255,.72) 50%, transparent 100%), radial-gradient(1px 1px at 34% 31%, rgba(255,255,255,.7) 50%, transparent 100%), radial-gradient(1px 1px at 49% 82%, rgba(165,190,255,.75) 50%, transparent 100%), radial-gradient(1px 1px at 63% 14%, rgba(230,246,255,.8) 50%, transparent 100%), radial-gradient(1px 1px at 78% 56%, rgba(147,200,255,.7) 50%, transparent 100%), radial-gradient(1px 1px at 91% 29%, rgba(255,255,255,.72) 50%, transparent 100%);
+  background-size: 520px 440px;
+  animation: space-star-drift 130s linear infinite;
+}
+
+.space-backdrop__nebula,
+.space-backdrop__stars { display: none; }
+
+.space-backdrop--static .space-backdrop__video { display: none; }
+.space-backdrop--static .space-backdrop__nebula,
+.space-backdrop--static .space-backdrop__stars { display: block; }
+
+@keyframes space-drift-blue { from { transform: translate3d(-1%, 0, 0) scale(1); } to { transform: translate3d(1%, -1%, 0) scale(1.035); } }
+@keyframes space-drift-violet { from { transform: translate3d(0, 1%, 0) scale(1.02); } to { transform: translate3d(-1%, -1%, 0) scale(1); } }
+@keyframes space-star-drift { to { background-position: 80px 54px; } }
+
+@media (max-width: 640px) {
+  .space-backdrop__nebula--violet { opacity: .75; }
+  .space-backdrop__stars { opacity: .3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .space-backdrop__video { display: none; }
+  .space-backdrop__nebula, .space-backdrop__stars { display: block; animation: none; will-change: auto; }
+  .space-backdrop__nebula--category { transition: none; }
+}

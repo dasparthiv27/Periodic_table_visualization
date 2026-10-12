@@ -1,0 +1,29 @@
+.nucleus-symbol {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 18px;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+  pointer-events: none;
+}
+
+.nucleus-counts {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 8.5px;
+  pointer-events: none;
+}
+
+.nucleus-glow-pulse {
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.68;
+  }
+}

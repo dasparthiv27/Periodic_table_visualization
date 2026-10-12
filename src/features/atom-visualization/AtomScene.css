@@ -1,0 +1,98 @@
+.atom-scene-panel {
+  position: relative;
+  background: rgba(7, 12, 24, 0.76);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+}
+
+.atom-scene-canvas-wrap {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 490px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #080e1c;
+  background-image: radial-gradient(ellipse at 50% 52%, rgba(46, 112, 174, 0.19), transparent 50%), radial-gradient(ellipse at 51% 49%, rgba(118, 71, 159, 0.13), transparent 38%), linear-gradient(rgba(152, 195, 233, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(152, 195, 233, 0.025) 1px, transparent 1px);
+  background-size: auto, 48px 48px, 48px 48px;
+}
+
+.atom-scene-canvas-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 15px;
+  z-index: 1;
+  pointer-events: none;
+  border: 1px solid rgba(133, 185, 222, 0.1);
+}
+
+.atom-svg { width: 100%; height: 100%; user-select: none; }
+.atom-3d-wrap { position: relative; width: 100%; height: 100%; min-height: 320px; }
+.atom-3d-wrap canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+
+.orbital-explorer { position: absolute; inset: 0; min-width: 0; min-height: 0; }
+.orbital-explorer > .orbital-cloud-canvas { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; touch-action: none; }
+.orbital-cloud-canvas canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.orbital-hud { position: absolute; z-index: 3; top: 62px; left: 30px; display: grid; gap: 5px; width: min(320px, calc(100% - 60px)); padding: 10px 12px; border: 1px solid rgba(133, 185, 222, 0.2); border-radius: 8px; background: rgba(7, 13, 26, 0.88); color: var(--text-secondary); }
+.orbital-hud label { color: var(--text-muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.orbital-hud select { min-width: 0; min-height: 38px; padding: 6px 9px; border: 1px solid var(--border-subtle); border-radius: 5px; background: var(--surface-glass-control); color: var(--text-primary); font: inherit; font-size: var(--font-size-xs); }
+.orbital-hud select:focus-visible { outline: 2px solid var(--border-focus); outline-offset: 2px; }
+.orbital-occupancy { color: var(--text-muted); font-size: 10px; }
+.orbital-explanation { position: absolute; z-index: 3; right: 20px; bottom: 22px; left: 20px; display: grid; justify-items: center; gap: 4px; max-width: 760px; margin: 0 auto; padding: 9px 13px; border: 1px solid rgba(133, 185, 222, 0.18); border-radius: 8px; background: rgba(7, 13, 26, 0.88); color: var(--text-secondary); text-align: center; pointer-events: none; }
+.orbital-explanation strong { color: var(--color-cyan); font-size: 11px; }
+.orbital-explanation span { font-size: 11px; line-height: 1.4; }
+.orbital-explanation code { color: var(--text-primary); font-size: 10px; }
+.orbital-explanation small { max-width: 700px; color: var(--text-muted); font-size: 9px; line-height: 1.4; }
+.orbital-unavailable { display: grid; place-items: center; width: 100%; height: 100%; min-height: 300px; padding: var(--space-6); color: var(--text-secondary); text-align: center; }
+
+.stage-annotation { position: absolute; z-index: 2; inset: 26px 30px; display: flex; align-items: flex-start; justify-content: space-between; pointer-events: none; color: #c6dcf5; font-family: var(--font-mono); }
+.stage-plate-mark { display: inline-flex; align-items: center; gap: 7px; color: #c6dcf5; font-size: 9px; letter-spacing: 0.12em; }
+.stage-plate-mark > span:not(.signal-mark) { color: #72839c; }
+.signal-mark { width: 6px; height: 6px; display: inline-block; background: #db6145; }
+.stage-readouts { display: flex; gap: 15px; }
+.stage-readouts span { display: flex; align-items: baseline; gap: 5px; }
+.stage-readouts small { color: #8196b2; font-size: 9px; }
+.stage-readouts b { color: #e8f4ff; font-size: 12px; font-weight: 500; }
+.stage-scale-note { position: absolute; left: 0; bottom: 0; color: #8196b2; font-size: 8px; letter-spacing: 0.1em; }
+.stage-annotation[data-visualization-mode='nucleus-3d'] .stage-scale-note { display: none; }
+
+.particle-legend { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 14px; padding: 7px 10px; border: 1px solid rgba(133, 185, 222, 0.22); border-radius: 2px; background: rgba(8, 15, 29, 0.88); color: #d9e8fa; font-size: 10px; pointer-events: none; white-space: nowrap; }
+.particle-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.legend-proton { background: var(--color-proton); }.legend-neutron { background: var(--color-neutron); }.legend-electron { background: var(--color-electron); }
+.viz-webgl-fallback { display: grid; place-items: center; height: 100%; min-height: 300px; margin: var(--space-4); padding: var(--space-6); text-align: center; color: var(--text-secondary); line-height: 1.6; background: rgba(13, 21, 37, 0.82); border: 1px solid var(--border-subtle); border-radius: 2px; }
+
+.educational-caveat { display: flex; align-items: flex-start; gap: var(--space-2); padding: 10px var(--space-4); background: rgba(11, 18, 32, 0.96); border-top: 1px solid var(--border-subtle); font-size: 10px; line-height: 1.45; color: var(--text-secondary); }
+.educational-caveat strong { color: var(--text-primary); }
+.educational-caveat .atom-interaction-hint { color: var(--color-cyan); flex: 0 0 auto; }
+.educational-caveat svg { flex-shrink: 0; color: var(--color-amber); }
+
+.mode-placeholder-view { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3); height: 100%; padding: var(--space-6); text-align: center; }
+
+@media (max-width: 640px) {
+  .atom-scene-canvas-wrap { height: min(105vw, 420px); min-height: 285px; }
+  .stage-annotation { inset: 21px 21px; }
+  .stage-plate-mark { font-size: 8px; gap: 5px; }
+  .stage-readouts { gap: 9px; }
+  .stage-readouts b { font-size: 11px; }
+  .particle-legend { gap: 8px; font-size: 9px; bottom: 18px; }
+  .orbital-hud { top: 55px; left: 18px; width: min(300px, calc(100% - 36px)); }
+  .orbital-explanation { right: 14px; bottom: 16px; left: 14px; padding: 8px 10px; }
+  .orbital-explanation small { font-size: 8px; }
+  .educational-caveat { padding: 10px 12px; }
+  .educational-caveat { flex-wrap: wrap; }
+  .educational-caveat .atom-interaction-hint { flex: 1 1 calc(100% - 32px); }
+}
+
+@media (max-width: 380px) {
+  .stage-annotation { inset: 19px 17px; }
+  .stage-plate-mark { max-width: 138px; line-height: 1.5; flex-wrap: wrap; }
+  .stage-readouts { gap: 7px; }
+  .stage-scale-note { font-size: 7px; }
+}

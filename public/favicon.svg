@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <radialGradient id="nucleusGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="60%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </radialGradient>
+    <linearGradient id="orbitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.3" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Dark circle background -->
+  <rect width="64" height="64" rx="14" fill="#0b1120" />
+  
+  <!-- Orbit 1 (horizontal ellipse rotated -30deg) -->
+  <ellipse cx="32" cy="32" rx="24" ry="9" fill="none" stroke="url(#orbitGrad)" stroke-width="1.8" transform="rotate(-30 32 32)" />
+  
+  <!-- Orbit 2 (horizontal ellipse rotated 30deg) -->
+  <ellipse cx="32" cy="32" rx="24" ry="9" fill="none" stroke="url(#orbitGrad)" stroke-width="1.8" transform="rotate(30 32 32)" />
+
+  <!-- Orbit 3 (horizontal ellipse rotated 90deg) -->
+  <ellipse cx="32" cy="32" rx="24" ry="9" fill="none" stroke="url(#orbitGrad)" stroke-width="1.8" transform="rotate(90 32 32)" />
+  
+  <!-- Electrons -->
+  <circle cx="13" cy="21" r="2.5" fill="#38bdf8" filter="url(#glow)" />
+  <circle cx="51" cy="43" r="2.5" fill="#38bdf8" filter="url(#glow)" />
+  <circle cx="32" cy="8" r="2.5" fill="#a855f7" filter="url(#glow)" />
+  
+  <!-- Nucleus glow & center -->
+  <circle cx="32" cy="32" r="7" fill="url(#nucleusGrad)" filter="url(#glow)" />
+  <circle cx="30" cy="30" r="2.5" fill="#e0f2fe" opacity="0.8" />
+</svg>

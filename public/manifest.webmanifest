@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "name": "Atomic Explorer",
+  "short_name": "Atomic Explorer",
+  "description": "Explore elements, atomic structure, and simplified atom models.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0e17",
+  "theme_color": "#0a0e17",
+  "icons": [
+    {
+      "src": "/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
