@@ -38,10 +38,24 @@ export const ElectronOrbit: React.FC<ElectronOrbitProps> = ({
       <circle
         r={radius}
         fill="none"
-        stroke="rgba(209, 198, 176, 0.34)"
-        strokeWidth="1.2"
-        strokeDasharray="3 3"
+        stroke="rgba(50, 147, 255, 0.12)"
+        strokeWidth="7"
+        className="orbit-path orbit-path--glow"
+      />
+      <circle
+        r={radius}
+        fill="none"
+        stroke={shellIndex % 3 === 1 ? 'rgba(181, 143, 255, 0.62)' : 'rgba(92, 211, 255, 0.72)'}
+        strokeWidth="1"
         className="orbit-path"
+      />
+      <circle
+        r={radius}
+        fill="none"
+        stroke="rgba(224, 247, 255, 0.38)"
+        strokeWidth="0.45"
+        strokeDasharray="1 9"
+        className="orbit-path orbit-path--detail"
       />
 
       {/* Shell label */}
@@ -49,7 +63,7 @@ export const ElectronOrbit: React.FC<ElectronOrbitProps> = ({
         <text
           x={radius + 4}
           y={-3}
-          fill="rgba(237, 231, 220, 0.72)"
+          fill="rgba(161, 215, 241, 0.8)"
           className="orbit-shell-label"
         >
           {shellLetter} ({electronCount})
@@ -66,15 +80,9 @@ export const ElectronOrbit: React.FC<ElectronOrbitProps> = ({
       >
         {electrons.map((el) => (
           <g key={el.id} transform={`translate(${el.x}, ${el.y})`}>
-            {/* Glow blur behind electron */}
-            <circle r={5} fill="rgba(103, 171, 195, 0.44)" filter="url(#electronGlow)" />
-            {/* Core electron dot */}
-            <circle
-              r={3}
-              fill="#69a9c2"
-              stroke="#ffffff"
-              strokeWidth="0.8"
-            />
+            <circle r={8} fill="rgba(26, 131, 255, 0.22)" filter="url(#electronGlow)" />
+            <circle r={5} fill="rgba(61, 201, 255, 0.62)" filter="url(#electronGlow)" />
+            <circle r={2.6} fill="#d9fcff" stroke="#ffffff" strokeWidth="0.8" />
           </g>
         ))}
       </g>

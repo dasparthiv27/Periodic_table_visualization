@@ -14,6 +14,14 @@ export const Nucleus: React.FC<NucleusProps> = ({
   symbol,
   radius = 28,
 }) => {
+  const nucleonCount = protons + neutrons;
+  const particleRadius = Math.max(1.25, Math.min(5.2, 21 / Math.sqrt(Math.max(nucleonCount, 1))));
+  const nucleons = Array.from({ length: nucleonCount }, (_, index) => {
+    const angle = index * Math.PI * (3 - Math.sqrt(5));
+    const distance = radius * 0.78 * Math.sqrt((index + 0.5) / Math.max(nucleonCount, 1));
+    return { x: Math.cos(angle) * distance, y: Math.sin(angle) * distance, isProton: index < protons };
+  });
+
   return (
     <g className="nucleus-group" transform="translate(0, 0)">
       {/* Outer ambient nuclear glow */}
@@ -24,13 +32,20 @@ export const Nucleus: React.FC<NucleusProps> = ({
         className="nucleus-glow-pulse"
       />
 
-      {/* Main core circle */}
-      <circle
-        r={radius}
-        fill="url(#nucleusCoreGrad)"
-        stroke="rgba(244, 63, 94, 0.4)"
-        strokeWidth="1.5"
-      />
+      <circle r={radius} fill="url(#nucleusCoreGrad)" opacity="0.38" />
+
+      {nucleons.map((nucleon, index) => (
+        <g key={`${nucleon.isProton ? 'p' : 'n'}-${index}`}>
+          <circle
+            cx={nucleon.x}
+            cy={nucleon.y}
+            r={particleRadius}
+            fill={nucleon.isProton ? 'url(#protonSphereGrad)' : 'url(#neutronSphereGrad)'}
+            className="nucleon-sphere"
+          />
+          <circle cx={nucleon.x - particleRadius * 0.28} cy={nucleon.y - particleRadius * 0.3} r={particleRadius * 0.22} fill="rgba(255,255,255,0.72)" className="nucleon-specular" />
+        </g>
+      ))}
 
       {/* Symbol in center */}
       <text

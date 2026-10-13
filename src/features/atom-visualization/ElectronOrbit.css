@@ -2,6 +2,20 @@
   transition: stroke 0.3s ease;
 }
 
+.orbit-path--glow {
+  opacity: 0.72;
+  filter: blur(3px) drop-shadow(0 0 5px rgba(44, 151, 255, 0.42));
+}
+
+.orbit-path:not(.orbit-path--glow) {
+  filter: drop-shadow(0 0 2px rgba(82, 196, 255, 0.38));
+}
+
+.orbit-path--detail {
+  filter: none;
+  opacity: 0.58;
+}
+
 .orbit-shell-label {
   font-family: var(--font-mono);
   font-size: 9.5px;

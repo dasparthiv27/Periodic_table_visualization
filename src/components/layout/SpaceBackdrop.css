@@ -4,7 +4,7 @@
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  background: radial-gradient(ellipse at 48% 42%, #101a30 0, var(--bg-app) 68%);
+  background: radial-gradient(ellipse at 48% 42%, #111c37 0, #050914 68%);
   contain: strict;
 }
 
@@ -25,7 +25,7 @@
   z-index: 2;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(4, 8, 18, .58), rgba(4, 8, 18, .7) 48%, rgba(4, 8, 18, .8));
+  background: linear-gradient(180deg, rgba(3, 6, 17, .47), rgba(3, 7, 19, .63) 48%, rgba(3, 6, 17, .76));
 }
 
 .space-backdrop__nebula,
@@ -38,11 +38,11 @@
 
 .space-backdrop__nebula { will-change: transform; }
 .space-backdrop__nebula--blue {
-  background: radial-gradient(ellipse at 17% 27%, rgba(30, 105, 176, .2), transparent 44%), radial-gradient(ellipse at 70% 74%, rgba(13, 105, 148, .12), transparent 42%);
+  background: radial-gradient(ellipse at 17% 27%, rgba(30, 105, 210, .27), transparent 44%), radial-gradient(ellipse at 70% 74%, rgba(13, 151, 195, .16), transparent 42%);
   animation: space-drift-blue 62s ease-in-out infinite alternate;
 }
 .space-backdrop__nebula--violet {
-  background: radial-gradient(ellipse at 82% 18%, rgba(118, 67, 164, .13), transparent 39%), radial-gradient(ellipse at 42% 84%, rgba(91, 54, 140, .09), transparent 45%);
+  background: radial-gradient(ellipse at 82% 18%, rgba(127, 73, 214, .2), transparent 39%), radial-gradient(ellipse at 42% 84%, rgba(91, 54, 174, .13), transparent 45%);
   animation: space-drift-violet 78s ease-in-out infinite alternate;
 }
 .space-backdrop__nebula--category {
@@ -52,14 +52,11 @@
 }
 .space-backdrop__stars {
   inset: 0;
-  opacity: .4;
-  background-image: radial-gradient(1px 1px at 8% 18%, rgba(216,238,255,.8) 50%, transparent 100%), radial-gradient(1px 1px at 19% 74%, rgba(132,202,255,.72) 50%, transparent 100%), radial-gradient(1px 1px at 34% 31%, rgba(255,255,255,.7) 50%, transparent 100%), radial-gradient(1px 1px at 49% 82%, rgba(165,190,255,.75) 50%, transparent 100%), radial-gradient(1px 1px at 63% 14%, rgba(230,246,255,.8) 50%, transparent 100%), radial-gradient(1px 1px at 78% 56%, rgba(147,200,255,.7) 50%, transparent 100%), radial-gradient(1px 1px at 91% 29%, rgba(255,255,255,.72) 50%, transparent 100%);
-  background-size: 520px 440px;
+  opacity: .48;
+  background-image: radial-gradient(1px 1px at 8% 18%, rgba(216,238,255,.9) 50%, transparent 100%), radial-gradient(1.5px 1.5px at 19% 74%, rgba(132,202,255,.82) 50%, transparent 100%), radial-gradient(1px 1px at 34% 31%, rgba(255,255,255,.8) 50%, transparent 100%), radial-gradient(1.5px 1.5px at 49% 82%, rgba(165,190,255,.82) 50%, transparent 100%), radial-gradient(1px 1px at 63% 14%, rgba(230,246,255,.9) 50%, transparent 100%), radial-gradient(1px 1px at 78% 56%, rgba(147,200,255,.8) 50%, transparent 100%), radial-gradient(1px 1px at 91% 29%, rgba(255,255,255,.82) 50%, transparent 100%);
+  background-size: 370px 330px;
   animation: space-star-drift 130s linear infinite;
 }
-
-.space-backdrop__nebula,
-.space-backdrop__stars { display: none; }
 
 .space-backdrop--static .space-backdrop__video { display: none; }
 .space-backdrop--static .space-backdrop__nebula,

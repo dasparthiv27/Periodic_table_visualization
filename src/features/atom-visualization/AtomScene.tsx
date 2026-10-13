@@ -89,8 +89,22 @@ export const AtomScene: React.FC<AtomSceneProps> = ({
                 <stop offset="100%" stopColor="#881337" />
               </radialGradient>
 
-              <filter id="electronGlow" x="-30%" y="-30%" width="160%" height="160%">
-                <feGaussianBlur stdDeviation="3" result="blur" />
+              <radialGradient id="protonSphereGrad" cx="32%" cy="28%" r="76%">
+                <stop offset="0%" stopColor="#fff0df" />
+                <stop offset="22%" stopColor="#ff9c77" />
+                <stop offset="72%" stopColor="#f04b58" />
+                <stop offset="100%" stopColor="#812647" />
+              </radialGradient>
+
+              <radialGradient id="neutronSphereGrad" cx="32%" cy="28%" r="76%">
+                <stop offset="0%" stopColor="#f1ffff" />
+                <stop offset="22%" stopColor="#8feaff" />
+                <stop offset="72%" stopColor="#687be8" />
+                <stop offset="100%" stopColor="#33285f" />
+              </radialGradient>
+
+              <filter id="electronGlow" x="-120%" y="-120%" width="340%" height="340%" colorInterpolationFilters="sRGB">
+                <feGaussianBlur stdDeviation="5" result="blur" />
                 <feComposite in="SourceGraphic" in2="blur" operator="over" />
               </filter>
             </defs>

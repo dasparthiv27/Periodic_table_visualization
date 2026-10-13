@@ -1,12 +1,13 @@
 .atom-scene-panel {
   position: relative;
-  background: rgba(7, 12, 24, 0.76);
+  background: rgba(5, 11, 25, 0.82);
   border: 1px solid var(--glass-border);
   border-radius: 12px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight), 0 0 38px rgba(20, 113, 202, 0.08);
+  backdrop-filter: blur(12px) saturate(125%);
 }
 
 .atom-scene-canvas-wrap {
@@ -18,8 +19,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: #080e1c;
-  background-image: radial-gradient(ellipse at 50% 52%, rgba(46, 112, 174, 0.19), transparent 50%), radial-gradient(ellipse at 51% 49%, rgba(118, 71, 159, 0.13), transparent 38%), linear-gradient(rgba(152, 195, 233, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(152, 195, 233, 0.025) 1px, transparent 1px);
+  background-color: #050a17;
+  background-image: radial-gradient(ellipse at 50% 53%, rgba(25, 104, 187, 0.27), transparent 47%), radial-gradient(ellipse at 51% 48%, rgba(118, 71, 199, 0.19), transparent 38%), linear-gradient(rgba(100, 169, 226, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(100, 169, 226, 0.025) 1px, transparent 1px);
   background-size: auto, 48px 48px, 48px 48px;
 }
 
@@ -33,6 +34,9 @@
 }
 
 .atom-svg { width: 100%; height: 100%; user-select: none; }
+.atom-scene-panel .nucleus-group { filter: drop-shadow(0 0 7px rgba(255, 81, 94, 0.36)); }
+.atom-scene-panel .nucleon-sphere { stroke: rgba(238, 250, 255, 0.52); stroke-width: 0.65; }
+.atom-scene-panel .nucleon-specular { pointer-events: none; }
 .atom-3d-wrap { position: relative; width: 100%; height: 100%; min-height: 320px; }
 .atom-3d-wrap canvas { display: block; width: 100%; height: 100%; touch-action: none; }
 
@@ -74,6 +78,10 @@
 .educational-caveat svg { flex-shrink: 0; color: var(--color-amber); }
 
 .mode-placeholder-view { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3); height: 100%; padding: var(--space-6); text-align: center; }
+
+@supports not (backdrop-filter: blur(1px)) {
+  .atom-scene-panel { background: rgba(5, 11, 25, 0.96); }
+}
 
 @media (max-width: 640px) {
   .atom-scene-canvas-wrap { height: min(105vw, 420px); min-height: 285px; }
