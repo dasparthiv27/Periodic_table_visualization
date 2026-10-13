@@ -1,5 +1,6 @@
-import React, { Suspense, lazy, useState } from 'react';
-import { Info, Box } from 'lucide-react';
+import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
+import { Info, Box, Maximize2, Minimize2 } from 'lucide-react';
+import { IconButton } from '../../components/common/IconButton';
 import { AtomCounts, AtomDerivedProperties, VisualizationMode } from '../../types/atom';
 import { VisualizationControls } from './VisualizationControls';
 import { Nucleus } from './Nucleus';
@@ -31,7 +32,26 @@ export const AtomScene: React.FC<AtomSceneProps> = ({
 }) => {
   const prefersReducedMotion = useReducedMotionPreference();
   const [resetKey, setResetKey] = useState(0);
+  const [is3dFullscreen, setIs3dFullscreen] = useState(false);
+  const atom3dRef = useRef<HTMLDivElement>(null);
   const isPlaying = preferences.animationEnabled && !prefersReducedMotion;
+
+  useEffect(() => {
+    const updateFullscreenState = () => {
+      setIs3dFullscreen(document.fullscreenElement === atom3dRef.current);
+    };
+    document.addEventListener('fullscreenchange', updateFullscreenState);
+    return () => document.removeEventListener('fullscreenchange', updateFullscreenState);
+  }, []);
+
+  const toggle3dFullscreen = () => {
+    const element = atom3dRef.current;
+    if (!element) return;
+    const action = document.fullscreenElement === element
+      ? document.exitFullscreen()
+      : element.requestFullscreen();
+    void action.catch(() => setIs3dFullscreen(false));
+  };
 
   const { protons, neutrons } = counts;
   const symbol = derived.element ? derived.element.symbol : 'X';
@@ -133,10 +153,17 @@ export const AtomScene: React.FC<AtomSceneProps> = ({
             />}
           </svg>
         ) : mode === 'nucleus-3d' ? (
-          <div className="atom-3d-wrap">
+          <div className="atom-3d-wrap" ref={atom3dRef}>
             <Suspense fallback={<div className="viz-webgl-fallback" role="status">Loading interactive 3D view…</div>}>
               <ThreeNucleus counts={counts} shells={shells} playing={isPlaying} showPaths={preferences.showPaths} showParticles={preferences.showParticles} resetKey={resetKey} />
             </Suspense>
+            <IconButton
+              className="atom-3d-fullscreen"
+              aria-label={is3dFullscreen ? 'Exit 3D fullscreen' : 'View 3D atom fullscreen'}
+              size="sm"
+              onClick={toggle3dFullscreen}
+              icon={is3dFullscreen ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
+            />
             <div className="particle-legend" role="group" aria-label="Particle legend">
               <span><i className="legend-dot legend-proton" />Protons</span>
               <span><i className="legend-dot legend-neutron" />Neutrons</span>

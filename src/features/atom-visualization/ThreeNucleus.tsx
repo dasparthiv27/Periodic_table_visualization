@@ -6,7 +6,7 @@ import { AtomCounts } from '../../types/atom';
 
 const COLORS = { proton: '#ff705f', neutron: '#8a9cff', electron: '#baf7ff' };
 
-const ParticleCloud = React.memo(function ParticleCloud({ positions, radius, color, emissive = 0, roughness = 0.45, glow = false }: { positions: [number, number, number][]; radius: number; color: string; emissive?: number; roughness?: number; glow?: boolean }) {
+const ParticleCloud = React.memo(function ParticleCloud({ positions, radius, color, emissive = 0, roughness = 0.45, glow = false, glowOpacity = 0.16 }: { positions: [number, number, number][]; radius: number; color: string; emissive?: number; roughness?: number; glow?: boolean; glowOpacity?: number }) {
   const mesh = useRef<THREE.InstancedMesh>(null);
   const haloMesh = useRef<THREE.InstancedMesh>(null);
   const instance = useMemo(() => new THREE.Object3D(), []);
@@ -25,7 +25,7 @@ const ParticleCloud = React.memo(function ParticleCloud({ positions, radius, col
   return <>
     {glow && <instancedMesh ref={haloMesh} args={[undefined, undefined, positions.length]}>
       <sphereGeometry args={[radius * 2.2, 12, 12]} />
-      <meshBasicMaterial color={color} transparent opacity={0.16} depthWrite={false} blending={THREE.AdditiveBlending} toneMapped={false} />
+      <meshBasicMaterial color={color} transparent opacity={glowOpacity} depthWrite={false} blending={THREE.AdditiveBlending} toneMapped={false} />
     </instancedMesh>}
     <instancedMesh ref={mesh} args={[undefined, undefined, positions.length]}>
       <sphereGeometry args={[radius, 16, 16]} />
@@ -81,7 +81,7 @@ function AtomModel({ counts, shells, playing, showPaths, showParticles }: { coun
     <ambientLight intensity={0.52} /><pointLight position={[4, 5, 6]} intensity={9} color="#a8eaff" /><pointLight position={[-4, -2, -3]} intensity={5} color="#9c78ff" /><pointLight position={[0, -4, 3]} intensity={3} color="#ff7d72" />
     {showParticles && <>
       <ParticleCloud positions={protons} radius={0.105} color={COLORS.proton} roughness={0.3} emissive={0.48} glow />
-      <ParticleCloud positions={neutrons} radius={0.105} color={COLORS.neutron} roughness={0.34} emissive={0.42} glow />
+      <ParticleCloud positions={neutrons} radius={0.105} color={COLORS.neutron} roughness={0.34} emissive={0.36} glow glowOpacity={0.1} />
     </>}
     {shells.map((count, i) => count > 0 && <ElectronShell key={i} count={count} index={i} playing={playing} showPaths={showPaths} visible={showParticles} />)}
     <OrbitControls makeDefault enableDamping minDistance={3} maxDistance={11} />

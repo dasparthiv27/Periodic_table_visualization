@@ -25,6 +25,16 @@ describe('isotope and ion lab', () => {
     unmount();
   });
 
+  it('restores the most abundant stable isotope neutron count', () => {
+    const onNeutronsChange = vi.fn();
+    const counts = { protons: 6, neutrons: 9, electrons: 6 };
+    render(<AtomBuilder counts={counts} derived={deriveAtomProperties(counts)} onProtonsChange={vi.fn()} onNeutronsChange={onNeutronsChange} onElectronsChange={vi.fn()} onResetToNeutral={vi.fn()} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Reset neutrons to most abundant stable isotope C-12' }));
+
+    expect(onNeutronsChange).toHaveBeenCalledWith(6);
+  });
+
   it('rejects out-of-range particle input accessibly and keeps the last valid value', () => {
     const onChange = vi.fn();
     render(<ParticleControl name="Neutrons" count={6} min={0} max={180} chargeBadge="0 e" accentColor="gray" glowColor="transparent" description="Sets isotope neutron count." onChange={onChange} />);

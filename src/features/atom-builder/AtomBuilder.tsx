@@ -1,6 +1,7 @@
 import React from 'react';
-import { Sliders, Zap } from 'lucide-react';
+import { RotateCcw, Sliders, Zap } from 'lucide-react';
 import { Panel } from '../../components/common/Panel';
+import { IconButton } from '../../components/common/IconButton';
 import { ParticleControl } from './ParticleControl';
 import { AtomCounts, AtomDerivedProperties } from '../../types/atom';
 import { findListedIsotope } from '../../lib/chemistry/isotope-data';
@@ -26,21 +27,42 @@ const AtomBuilderComponent: React.FC<AtomBuilderProps> = ({
   const listedIsotope = derived.element
     ? findListedIsotope(derived.element, derived.massNumber)
     : undefined;
+  const isotopes = derived.element?.commonIsotopes ?? [];
+  const stableIsotopes = isotopes.filter((isotope) => isotope.isStable);
+  const referenceIsotope = stableIsotopes.length
+    ? stableIsotopes.reduce((mostAbundant, isotope) =>
+        (isotope.abundance ?? 0) > (mostAbundant.abundance ?? 0) ? isotope : mostAbundant
+      )
+    : isotopes[0];
+  const referenceIsotopeLabel = referenceIsotope
+    ? referenceIsotope.isStable
+      ? `Reset neutrons to most abundant stable isotope ${derived.element?.symbol}-${referenceIsotope.massNumber}`
+      : `Reset neutrons to listed isotope ${derived.element?.symbol}-${referenceIsotope.massNumber}`
+    : 'No reference isotope available';
   return (
     <Panel
       title="Particle Controls"
       subtitle="Set counts to explore element, isotope, and ion state"
       icon={<Sliders size={18} />}
       actions={
-        <button
-          type="button"
-          onClick={onResetToNeutral}
-          className="neutralize-btn"
-          title="Match electron count to protons (net charge 0)"
-        >
-          <Zap size={13} />
-          <span>Make Neutral</span>
-        </button>
+        <>
+          <IconButton
+            aria-label={referenceIsotopeLabel}
+            size="sm"
+            disabled={!referenceIsotope}
+            onClick={() => referenceIsotope && onNeutronsChange(referenceIsotope.neutrons)}
+            icon={<RotateCcw size={14} />}
+          />
+          <button
+            type="button"
+            onClick={onResetToNeutral}
+            className="neutralize-btn"
+            title="Match electron count to protons (net charge 0)"
+          >
+            <Zap size={13} />
+            <span>Make Neutral</span>
+          </button>
+        </>
       }
     >
       <div className="atom-builder-controls">
